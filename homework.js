@@ -124,8 +124,33 @@ function sum(array) {
 // 11. Create a function called "average" that takes an array of numbers
 // and returns the average of those numbers.
 
+function average(array) {
+    let total = 0
+    if (array.length < 1){
+        return undefined
+    }
+    else {
+        let total = sum(array)
+        return total/array.length
+    }
+}
+
 // 12. Create a function called "minimum" that takes an array of numbers and
 // returns the smallest number in that array.
+
+function minimum(array) {
+    if (array.length < 1) {
+        return undefined
+    } else {
+        let minimum = array[0]
+        for (let number of array) {
+            if (number < minimum) {
+                minimum = number
+            }
+        }
+        return minimum
+    }
+}
 
 // 13. There are many techniques to sort arrays in programming. Your programming
 // language will likely include the ability to do this. We are going to
@@ -150,3 +175,30 @@ function sum(array) {
 // Note 2: Selection sort can be implemented using one array. Read the explanation at
 // https://courses.cs.vt.edu/csonline/Algorithms/Lessons/SelectionSort/index.html
 // to see how. This may make more sense to you.
+
+function selectionSort(array){
+    if (array.length <= 1) {
+        return array
+    } else {
+        let sorted = true
+        for (let index = 1; index<array.length; index++){
+            if (array[index] < array[index-1]){
+                sorted = false
+            }
+        }
+        if (sorted){
+            return array
+        } else {
+            let arrayCopy = array.slice(0)
+            let sortedArray = []
+            let nextElement = undefined
+            for (let number of array){
+                nextElement = minimum(arrayCopy)
+                sortedArray.push(nextElement)
+                arrayCopy.splice(arrayCopy.indexOf(nextElement),1)
+            }
+            return sortedArray
+        }
+    }
+}
+        
